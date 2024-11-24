@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useGetModulesQuery } from "../../api/endpoints/module";
@@ -21,19 +21,19 @@ const DisplayModules: React.FC = () => {
 
   const modules: Module[] = response?.modules || [];
 
-  useEffect(() => {
-    if (isLoading && !modules.length) {
-      console.log("Chargement des modules en cours...");
-    }
+  // useEffect(() => {
+  //   if (isLoading && !modules.length) {
+  //     console.log("Chargement des modules en cours...");
+  //   }
 
-    if (modules.length > 0) {
-      console.log("Modules récupérés :", modules);
-    }
+  //   if (modules.length > 0) {
+  //     console.log("Modules récupérés :", modules);
+  //   }
 
-    if (error) {
-      console.error("Erreur lors de la récupération des modules :", error);
-    }
-  }, [modules, error, isLoading]);
+  //   if (error) {
+  //     console.error("Erreur lors de la récupération des modules :", error);
+  //   }
+  // }, [modules, error, isLoading]);
 
   if (isLoading)
     return <p className="text-center mt-8">Chargement des modules...</p>;

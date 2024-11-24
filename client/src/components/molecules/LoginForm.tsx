@@ -16,8 +16,8 @@ const LoginForm: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await login({ email, password });
-      console.log("API Response:", response);
+      // const response = await login({ email, password });
+      // console.log("API Response:", response);
       const token = await login({ email, password }).unwrap();
       dispatch(setToken(token));
     } catch (err) {

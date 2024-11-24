@@ -14,7 +14,7 @@ const authSlice = createSlice({
   reducers: {
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
-      console.log("Token stocké dans Redux:", state.token); // Vérification ici
+      // console.log("Token stocké dans Redux:", state.token); 
     },
     clearToken: (state) => {
       state.token = null;
