@@ -1,8 +1,10 @@
 import React from "react";
-import LoginTemplate from "./components/templates/LoginTemplate";
+import { useRoutes } from "react-router-dom";
+import routes from "./routes/routes";
 
 const App: React.FC = () => {
-  return <LoginTemplate />;
+  const routing = useRoutes(routes);
+  return <>{routing}</>;
 };
 
-export default App;   
+export default App;

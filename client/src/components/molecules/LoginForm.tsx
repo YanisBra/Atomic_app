@@ -1,12 +1,29 @@
 import React, { useState } from "react";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import Checkbox from "../atoms/Checkbox";
+import Text from "../atoms/Text";
+import { useLoginMutation } from "../../api/endpoints/auth";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../store/slices/authSlice";
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [keepLoggedIn, setKeepLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const [login, { isLoading, error }] = useLoginMutation();
+
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      const response = await login({ email, password });
+      console.log("API Response:", response);
+      const token = await login({ email, password }).unwrap();
+      dispatch(setToken(token));
+    } catch (err) {
+      console.error("Login failed", err);
+    }
+  };
 
   return (
     <form className="space-y-4">
@@ -22,20 +39,13 @@ const LoginForm: React.FC = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Checkbox
-        label="Keep me logged in"
-        checked={keepLoggedIn}
-        onChange={(e) => setKeepLoggedIn(e.target.checked)}
-      />
-      <Button
-        label="Se connecter"
-        onClick={() => console.log("Login")}
-        className="w-full"
-      />
-      <p className="text-sm mt-4 text-center">
+      <Button label="Se connecter" onClick={handleLogin} className="w-full" />
+      {isLoading && <p>Chargement...</p>}
+      {error && <p>Email ou mot de passe incorrect</p>}
+      <Text className="text-sm mt-4 text-center">
         Mot de passe oublié?{" "}
         <span className="text-blue-500 cursor-pointer">Réinitialiser</span>
-      </p>
+      </Text>
     </form>
   );
 };
