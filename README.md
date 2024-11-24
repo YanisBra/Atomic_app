@@ -1,9 +1,9 @@
-
 # Projet
 
 ## Installation du projet
 
 ### Prérequis
+
 - Node.js (version 16+)
 - Symfony CLI
 - Composer
@@ -13,24 +13,28 @@
 ### Étapes d'installation
 
 1. **Clonez le dépôt :**
+
    ```bash
    git clone https://github.com/YanisBra/Atomic_app.git
    cd Atomic_app
    ```
 
 2. **Installation des dépendances côté front-end :**
+
    ```bash
    cd client
    npm install
    ```
 
 3. **Installation des dépendances côté back-end :**
+
    ```bash
    cd app
    composer install
    ```
 
 4. **Configuration des fichiers d'environnement :**
+
    - Copiez les fichiers `.env.example` en `.env` pour le front et le back.
    - Configurez les variables de connexion à la base de données dans le fichier `api/.env` :
      ```
@@ -38,6 +42,7 @@
      ```
 
 5. **Migration de la base de données :**
+
    ```bash
    cd app
    php bin/console doctrine:database:create
@@ -60,11 +65,13 @@
 ## Présentation de l'application
 
 ### Brief
+
 Cette application permet aux utilisateurs de se connecter via une authentification sécurisée (JWT) et de récupérer une liste de modules depuis un serveur backend Symfony. Ces modules sont affichés sous forme de cartes dans une interface utilisateur intuitive.
 
 ### Détails techniques et documentation des endpoints
 
 #### **Endpoint 1 : Authentification**
+
 - **URL** : `/api/login_check`
 - **Méthode** : `POST`
 - **Description** : Permet à l'utilisateur de se connecter et de recevoir un token JWT.
@@ -83,6 +90,7 @@ Cette application permet aux utilisateurs de se connecter via une authentificati
   ```
 
 #### **Endpoint 2 : Récupération des modules**
+
 - **URL** : `/api/modules`
 - **Méthode** : `GET`
 - **Description** : Retourne la liste des modules disponibles pour l'utilisateur connecté.
@@ -113,18 +121,20 @@ Cette application permet aux utilisateurs de se connecter via une authentificati
 - **Base de données** : MySQL
 - **Authentification** : JWT
 
-
 ## Structure de la Base de Données et Entités
 
 ### Tables Générées
 
 #### Table `user`
+
 - Contient les informations des utilisateurs.
 
 #### Table `module`
+
 - Contient les détails des modules disponibles.
 
 #### Table `user_module`
+
 - Table intermédiaire pour la relation `ManyToMany` entre les utilisateurs et les modules.
 
 ### Schéma Relationnel Simplifié
@@ -149,10 +159,12 @@ user_module
 ### Fixtures
 
 #### Objectifs des Fixtures
+
 - Créer des données initiales pour tester l'application.
 - Générer des utilisateurs et des modules avec des relations aléatoires.
 
 #### Exemple d'utilisateur généré :
+
 ```plaintext
 User:
 - Email: alan@alan.fr
@@ -161,6 +173,7 @@ User:
 ```
 
 #### Exemple de module généré :
+
 ```plaintext
 Module:
 - Title: Programmation Orientée Objet (POO)
@@ -171,7 +184,6 @@ Module:
 ### Schéma Graphique
 
 ![Schéma de la base de données](/client/public/schema_database.png)
-
 
 ## Généralités sur la sécurité
 
@@ -184,7 +196,8 @@ Module:
 ## Features
 
 ### Wireframe
-Les wireframes sont conçus pour offrir une navigation simple et intuitive. 
+
+Les wireframes sont conçus pour offrir une navigation simple et intuitive.
 
 Ils ont été intégrés en respectant les bonnes pratiques de design UX/UI avec **Tailwind CSS**.
 
@@ -192,14 +205,16 @@ Voici une capture du wireframe :
 ![Wireframe](client/public/wireframe.png)
 
 ### Authentification JWT
+
 - Les utilisateurs s'authentifient via `/api/login_check`.
 - Le token JWT est stocké dans Redux côté client.
 
 ### Récupération des modules
+
 L'application appelle `/api/modules` pour récupérer les modules. Ces données sont affichées dans une interface utilisateur sous forme de cartes.
 
 ### Diagramme de fonctionnement
-Voici un diagramme simplifié des interactions entre le front-end et le back-end :
 
+Voici un diagramme de séquence simplifié des interactions entre le front-end et le back-end pour la gestion de l’authentification avec identifiant/mot de passe et JWT :
 
-![Diagramme de Séquence : Gestion du Login/Mot de Passe avec JWT](/client/public/diagramme_de_séquence.png)
+![Diagramme de Séquence : Gestion du Login/Mot de Passe avec JWT](/client/public/diagramme_de_sequence.png)
